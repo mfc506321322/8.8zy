@@ -4,7 +4,7 @@ define(['jquery'],function($){
     var data = {
         users:[]
     }
-    if(data.users.length == 0 && JSON.parse(storage.getItem('users')).users.length != 0){
+    if(data.users.length == 0 && JSON.parse(storage.getItem('users'))){
         data = JSON.parse(storage.getItem('users'));
         $('tbody').html(template(JSON.parse(storage.getItem('users'))));
     }
