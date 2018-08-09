@@ -7,6 +7,10 @@ define(['jquery'],function($){
     if(data.users.length == 0 && JSON.parse(storage.getItem('users'))){
         data = JSON.parse(storage.getItem('users'));
         $('tbody').html(template(JSON.parse(storage.getItem('users'))));
+        $('h3').hide();
+    }
+    if($('tbody').html().trim()==''){
+        $('h3').show();
     }
     $('#submit').click(function(){
         var flag = true;
@@ -27,11 +31,15 @@ define(['jquery'],function($){
             })
             storage.setItem('users',JSON.stringify(data));
             $('tbody').html(template(data));
+            $('h3').hide();
         }
     })
     $('tbody').on('click','.btn-danger',function(){
         data.users.splice($(this).parents('tr').find('td').eq(0).html()*1,1);
         $(this).parents('tr').remove();
         storage.setItem('users',JSON.stringify(data));
+        if($('tbody').html().trim()==''){
+            $('h3').show();
+        }
     })
 })
