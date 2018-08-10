@@ -2,7 +2,9 @@ require.config({
     baseUrl:'./js/',
     paths:{
         render:'app/render',
-        jquery:'libs/jquery-3.3.1'
+        jquery:'libs/jquery-3.3.1',
+        handlebars:'libs/handlebars.min',
+        template:'app/template'
     }
 })
 require(['render'])

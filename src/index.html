@@ -8,7 +8,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/libs/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -45,18 +44,34 @@
             <tbody>
             </tbody>
         </table>
-        <h3 class="text-center">暂无数据!</h3>
+        <div class="box text-center">
+            <div class="pagebtn prev" id="prevbtn"><a href="javascript:;" aria-label="Previous">&laquo;</a></div>
+            <ul class="pagination">
+            </ul>
+            <div class="pagebtn next" id="nextbtn"><a href="javascript:;" aria-label="Next">&raquo;</a></div>
+        </div>
     </div>
     <script type="text/x-handlebars-template" class="text">
-        {{#each users}}
+        {{#if users.length}}{{#each users}}
         <tr>
-            <td>{{@index}}</td>
+            <td>{{#showid @index}}{{/showid}}</td>
             <td>{{name}}</td>
             <td>{{num}}</td>
             <td>{{result}}</td>
             <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
         </tr>
-        {{/each}}
+        {{/each}}{{else}}
+        <tr>
+            <td colspan="5" class="text-center active">暂无数据</td>
+        </tr>
+        {{/if}}
+    </script>
+    <script type="text/x-handlebars-template" class="page">
+        {{#each pages}} {{#unless @index}}
+        <li class="active" index="{{@index}}" data-start="{{num}}"><a href="javascript:;">{{#showpage @index}}{{/showpage}}</a></li>
+        {{else}}
+        <li index="{{@index}}" data-start="{{num}}"><a href="javascript:;">{{#showpage @index}}{{/showpage}}</a></li>
+        {{/unless}} {{/each}}
     </script>
     <script src="js/libs/handlebars.min.js"></script>
     <script src="js/libs/require.js" defer="true" async data-main="js/main.js"></script>
